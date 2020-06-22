@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="http://localhost:8056/index.html"> 当前页面链接</a>
+
+<div>
+    hello websocke
+
+
+</div>
+<div>
+    打开浏览器查看websocket 的连接
+</div>
+
+<script>
+
+    const socket = new WebSocket("ws://127.0.0.1:8056/websocket");
+    socket.onopen = (ws) => {
+        console.log(new Date().getTime() + " start ws... ")
+
+    }
+    socket.onmessage = (ws) => {
+        console.log(new Date().getTime() + "ws: " + ws.data)
+
+    }
+    socket.onclose = (ws) => {
+        console.log(new Date().getTime() + " close ws... ")
+
+    }
+    socket.onerror = (ws) => {
+        console.log(new Date().getTime() + " ws error ")
+
+    }
+
+
+    setTimeout(() => {
+        socket.send("send msg")
+    }, 2000)
+
+
+    setTimeout(() => {
+        socket.close()
+    }, 2000)
+
+
+</script>
+
+</body>
+</html>
